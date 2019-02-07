@@ -1,0 +1,7 @@
+<AppButton           
+          action={()=> console.log('click')}
+          iconName="home"
+          iconColor="#fff"
+          title="Home"
+          bgColor="rgba(220,100,20,0.7)"
+        />
