@@ -1,26 +1,38 @@
-import React, { Componente } from 'react';
+import React from 'react';
 import { Button } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { Dimensions, StyleSheet } from 'react-native';
-let colorFondo;
-let ancho;
+import { Dimensions } from 'react-native';
 
 const AppButton = (props) => {
-  const { action, iconName, iconColor, title, bgColor } =  props;
-  const { width } = Dimensions.get('window');
-  colorFondo = bgColor;
-  ancho = width;
+  const { action, iconName, iconSize, iconColor, title, bgColor } =  props;
+  const { width } = Dimensions.get('window');  
   return (
-    <Button 
+    <Button       
       onPress = {action}
-      style={styles.buttonStyles}
-      title={title}
+      buttonStyle = {{
+        backgroundColor: bgColor,
+        height: 45,       
+        borderColor: "transparent", 
+        borderWidth: 0,
+        borderRadius: 5,
+        marginBottom: 5,
+        width: width,
+      }}    
+      containerStyle = {{
+        opacity: 0.8,
+        backgroundColor: bgColor
+      }}
+      titleStyle = {{
+        color: iconColor        
+      }}  
+      title= {title}            
       icon={
         <Icon 
           type='font-awesome'
           name={iconName}
-          size={15}
+          size={iconSize}
           color={iconColor}
+          style={{marginLeft: 15}}
         />
       }
       text={title}
@@ -30,16 +42,3 @@ const AppButton = (props) => {
 }
 
 export default AppButton;
-
-const styles = StyleSheet.create({
-  buttonStyles: {
-    backgroundColor: colorFondo,
-    height: 45,
-    borderColor: "transparent",
-    borderWidth: 0,
-    borderRadius: 5,
-    marginBottom: 5,
-    width: ancho
-  }
-})
-
