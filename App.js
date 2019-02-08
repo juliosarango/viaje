@@ -1,8 +1,10 @@
 import React from 'react';
 import PreLoader from './application/components/PreLoader';
-import GuestNavigation from  './application/navigations/Guest'
 import { Text } from 'react-native';
 import * as firebase from 'firebase';
+
+import GuestNavigation from  './application/navigations/Guest'
+import LoggedNavigation from  './application/navigations/Logged'
 
 
 export default class App extends React.Component {  
@@ -31,11 +33,12 @@ export default class App extends React.Component {
   render() {
     const { isLogged, loaded } = this.state;
 
-    if (!loaded){
+    /*if (!loaded){
       return (<PreLoader />)
-    }
+    }*/
     if (isLogged) {
-      return (<Text>Logueado</Text>)
+      console.log('logueado');
+      return (<LoggedNavigation />)
     }
 
     return (                  

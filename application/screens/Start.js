@@ -41,6 +41,9 @@ export default class Start extends Component {
     if (type === 'success') {
       const credentials = firebase.auth.FacebookAuthProvider.credential(token);
       firebase.auth().signInWithCredential(credentials)
+        .then( (user) => {
+          console.log('entramos');
+        })
         .catch( error => {
           Toast.showWithGravity("Error accediendo con facebook",Toast.LONG, Toast.BOTTOM)  
         })

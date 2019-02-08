@@ -5,3 +5,6 @@
           title="Home"
           bgColor="rgba(220,100,20,0.7)"
         />
+
+//generar claves para app facebook
+keytool -exportcert -alias androiddebugkey -keystore ~/.android/debug.keystore | openssl sha1 -binary | openssl base64

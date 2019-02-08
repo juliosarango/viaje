@@ -27,8 +27,7 @@ const AppNavigator = createStackNavigator(
         alignSelf: 'center',
         fontSize: 20,
         color: '#fff',
-        fontWeight: 'bold',
-        flex: 1,
+        fontWeight: 'bold',        
       }
     }
   }
