@@ -15,8 +15,7 @@ const AppButton = (props) => {
         borderColor: "transparent", 
         borderWidth: 0,
         borderRadius: 5,
-        marginBottom: 5,
-        width: width,
+        marginBottom: 5,        
       }}    
       containerStyle = {{
         opacity: 0.8,

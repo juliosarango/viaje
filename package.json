@@ -17,6 +17,9 @@
     "react-navigation": "^3.1.5",
     "tcomb-form-native": "^0.6.20"
   },
+  "env": {
+    "EXPO_DEBUG":"true"
+  },
   "devDependencies": {
     "babel-preset-expo": "^5.0.0"
   },

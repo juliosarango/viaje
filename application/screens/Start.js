@@ -7,6 +7,8 @@ import Toast from 'react-native-simple-toast';
 import firebaseConfig from '../utils/firebase';
 import * as firebase from 'firebase';
 
+import facebook from '../utils/facebook';
+
 firebase.initializeApp(firebaseConfig);
 
 export default class Start extends Component {
@@ -23,11 +25,30 @@ export default class Start extends Component {
 
   }
 
-  register() {
+  register = () => {
+    const navigateAction = NavigationActions.navigate({
+      routeName: 'Register'
+    });
+    this.props.navigation.dispatch(navigateAction);
 
   }
 
   async facebook() {
+    const { type, token } = await Expo.Facebook.logInWithReadPermissionsAsync(
+      facebook.config.application_id,
+      { permisions: facebook.config.permissions }
+    );
+    if (type === 'success') {
+      const credentials = firebase.auth.FacebookAuthProvider.credential(token);
+      firebase.auth().signInWithCredential(credentials)
+        .catch( error => {
+          Toast.showWithGravity("Error accediendo con facebook",Toast.LONG, Toast.BOTTOM)  
+        })
+    } else if(type === 'cancel') {
+      Toast.showWithGravity("Inicio de sesion cancelado",Toast.LONG, Toast.BOTTOM)  
+    } else {
+      Toast.showWithGravity("Error desconocido",Toast.LONG, Toast.BOTTOM)  
+    }
 
   }
   render() {
