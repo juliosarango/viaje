@@ -3,14 +3,13 @@ import { View, Text, StyleSheet } from 'react-native';
 
 export default class RestaurantEmpty extends Component {
   render() {
-    const { text } = this.props;
-    console.log("llegamos");
+    const { text } = this.props;    
     return (
-      <view style={styles.restaurantEmptyView}>
+      <View style={styles.restaurantEmptyView}>
         <Text style={styles.RestaurantEmptyText}>
           {text}
         </Text>
-      </view>
+      </View>
     )
   }  
 }

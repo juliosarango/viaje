@@ -5,7 +5,7 @@ import { Dimensions } from 'react-native';
 
 const AppButton = (props) => {
   const { action, iconName, iconSize, iconColor, title, bgColor } =  props;
-  const { width } = Dimensions.get('window');  
+  const { width } = iconSize ? Dimensions.get('window') : {};  
   return (
     <Button       
       onPress = {action}
@@ -15,7 +15,8 @@ const AppButton = (props) => {
         borderColor: "transparent", 
         borderWidth: 0,
         borderRadius: 5,
-        marginBottom: 5,        
+        marginBottom: 5,      
+        width: width  
       }}    
       containerStyle = {{
         opacity: 0.8,
@@ -29,7 +30,7 @@ const AppButton = (props) => {
         <Icon 
           type='font-awesome'
           name={iconName}
-          size={iconSize}
+          size={15}
           color={iconColor}
           style={{marginLeft: 15}}
         />

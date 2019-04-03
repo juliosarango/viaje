@@ -12,6 +12,7 @@ import Toast from 'react-native-simple-toast';
 const Form = t.form.Form;
 
 export default class Login extends Component {
+  
   constructor() {
     super();
 

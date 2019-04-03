@@ -1,53 +1,20 @@
 import React from 'react';
 import RestaurantsScreen from '../screens/restaurants/Restaurants';
 import { createDrawerNavigator, createStackNavigator, createAppContainer } from 'react-navigation';
-
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-const defaultNavigationOptions = {
-  headerStyle: {
-    backgroundColor: 'rgba(200,38,74,1)'
-  },
-  headerTitleStyle: {
-    textAlign: 'center',
-    alignSelf: 'center',
-    fontSize: 20,
-    color: '#fff',
-    fontWeight: 'bold',
-    flex: 1,
-  }
-};
-
-const leftIcon = (navigation, icon) => (
-  <Icon 
-    name={icon}
-    style={{marginLeft: 20}}
-    size={20}
-    color="white"
-    onPress={() => navigation.navigate('DrawerOpen')}
-
-  />
-)
-
-const rightIcon = (navigation, icon) => (
-  <Icon 
-    name={icon}
-    style={{marginLeft: 20}}
-    size={30}
-    color="white"
-    onPress={() => navigation.navigate('ListRestaurants')}
-
-  />
-)
+import defaultNavigationOptions from './Helper';
+import leftIcon from './Helper';
+import rightIcon from './Helper';
 
 const restaurantScreensStack = createStackNavigator(
+  
   {
     ListRestaurants: {
       screen: RestaurantsScreen,
       navigationOptions: ({navigation}) => ({
-        title: 'Restaurantes',
-        drawerIcon: ({tintColor}) => (<Icon name="home" size={24} style={{color:tintColor}} />),
-        headerLeft: leftIcon(navigation, 'bars')
+        title: 'Restaurantes',        
+        headerLeft : leftIcon(navigation, 'bars')
       })
     }
 
@@ -55,16 +22,20 @@ const restaurantScreensStack = createStackNavigator(
   defaultNavigationOptions    
 );
 
-const drawerScreens = createDrawerNavigator(
+const RootStack = createDrawerNavigator(
   {
     RestaurantsScreen: {
-      screen: restaurantScreensStack
+      screen: restaurantScreensStack,
+      navigationOptions: ({navigation}) => ({
+        drawerLabel: 'Restaurantes',
+        drawerIcon: ({tintColor}) => (<Icon name="home" size={24} style={{color:tintColor}} />),        
+      })
     },
   },
   {
     drawerBackgroundColor: 'rgba(128,35,60,0.7)',
     contentOptions: {
-      actibeTintColor: 'white',
+      activeTintColor: 'white',
       activeBackgroundColor: 'transparent',
       inactiveTintColor: 'white',
       itemsContainerStyle: {
@@ -74,4 +45,4 @@ const drawerScreens = createDrawerNavigator(
   }
 )
 
-export default createAppContainer(drawerScreens)
+export default createAppContainer(RootStack)

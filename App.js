@@ -5,7 +5,9 @@ import * as firebase from 'firebase';
 
 import GuestNavigation from  './application/navigations/Guest'
 import LoggedNavigation from  './application/navigations/Logged'
+import RestaurantEmpty from './application/components/restaurant/RestaurantEmpty';
 
+console.disableYellowBox = true;
 
 export default class App extends React.Component {  
 
@@ -16,6 +18,7 @@ export default class App extends React.Component {
 
   async componentDidMount() {
     await firebase.auth().onAuthStateChanged( (user) => {
+      
       if (user !== null) {
         this.setState({
           isLogged: true,
@@ -36,8 +39,8 @@ export default class App extends React.Component {
     /*if (!loaded){
       return (<PreLoader />)
     }*/
-    if (isLogged) {
-      console.log('logueado');
+    if (isLogged) {      
+      //return (<Text>Logueado</Text>)
       return (<LoggedNavigation />)
     }
 

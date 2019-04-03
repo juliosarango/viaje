@@ -7,34 +7,39 @@ import * as firebase from 'firebase';
 import { NavigationActions } from 'react-navigation';
 import RestaurantEmpty from '../../components/restaurant/RestaurantEmpty';
 import RestaurantAddButton from '../../components/restaurant/RestaurantAddButton';
+import { isObject } from 'util';
 
-class Restaurants extends Component {
+class Restaurants extends Component {  
+
   constructor() {
     super();
-    this.refRestaurants = firebase.database().ref().child('restaurants');
+    this.refRestaurants = firebase.database().ref().child('restaurants');      
+  }  
 
-  }
   state = {
     restaurants: [],
     loaded: false,
     restaurant_logo: require('../../../assets/images/restaurant.jpg')
   }
 
-  componentDidMount() {
-    this.refRestaurants.on('value', snapshot => {
-      let restaurants = [];
-      snapshot.map ( snap => {
-        restaurants.push({
-          id: snap.key,
-          name: snap.val().name,
-          address: snap.val().address,
-          capacity: snap.val().capacity,
-          description: snap.val().description
-        })
+  componentDidMount() {    
+    let restaurants = [];
+    if (isObject(this.refRestaurants.value)) {      
+      this.refRestaurants.on('value', snapshot => {        
+        snapshot.map ( snap => {
+          restaurants.push({
+            id: snap.key,
+            name: snap.val().name,
+            address: snap.val().address,
+            capacity: snap.val().capacity,
+            description: snap.val().description
+          })
+        })        
       })
-      this.setState({ 
-        restaurants
-      })
+    }    
+    this.setState({
+      restaurants,
+      loaded: true
     })
   }
 
@@ -42,7 +47,7 @@ class Restaurants extends Component {
     const navigateAction = NavigationActions.navigate({
       routeName: 'AddRestaurant'
     });
-    this.props.navigation.dispatch(navigateAction);    
+    this.props.navigation.dispatch(navigateAction);
   }
 
   restaurantDetail = (restaurant) => {
@@ -65,9 +70,11 @@ class Restaurants extends Component {
   }
   render() {
     const { loaded, restaurants } = this.state;
+    
     if (!loaded) {
       return <PreLoader />
     }
+
     if (!restaurants.length) {
       return (
         <BackgroundImage>
