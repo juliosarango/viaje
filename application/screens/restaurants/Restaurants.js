@@ -12,8 +12,7 @@ import { isObject } from 'util';
 class Restaurants extends Component {  
 
   constructor() {
-    super();
-    this.refRestaurants = firebase.database().ref().child('restaurants');      
+    super();    
   }  
 
   state = {
@@ -23,8 +22,11 @@ class Restaurants extends Component {
   }
 
   componentDidMount() {    
+    this.refRestaurants = firebase.database().ref().child('restaurants');      
+    console.log(this.refRestaurants);
     let restaurants = [];
-    if (isObject(this.refRestaurants.value)) {      
+    //if (this.refRestaurants.value)) {      
+
       this.refRestaurants.on('value', snapshot => {        
         snapshot.map ( snap => {
           restaurants.push({
@@ -36,7 +38,7 @@ class Restaurants extends Component {
           })
         })        
       })
-    }    
+    //}    
     this.setState({
       restaurants,
       loaded: true
@@ -70,6 +72,7 @@ class Restaurants extends Component {
   }
   render() {
     const { loaded, restaurants } = this.state;
+    console.log(restaurants);
     
     if (!loaded) {
       return <PreLoader />
